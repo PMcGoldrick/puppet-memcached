@@ -38,3 +38,5 @@ Manage memcached via Puppet
 * $max_connections = 8192
 * $lock_memory = false (WARNING: good if used intelligently, google for -k key)
 * $install_dev = false (TRUE if 'libmemcached-dev' package should be installed)
+* $create_pid   = true  (FALSE on osfamily == Debian)
+* $pid_path    = '/var/run/memcached.pid'
