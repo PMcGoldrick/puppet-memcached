@@ -11,7 +11,8 @@ class memcached(
   $max_connections = '8192',
   $verbosity       = undef,
   $unix_socket     = undef,
-  $install_dev     = false
+  $install_dev     = false,
+  $pid_path        = '/var/run/memcached.pid',
 ) inherits memcached::params {
 
   package { $memcached::params::package_name:
