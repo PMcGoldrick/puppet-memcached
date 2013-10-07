@@ -14,7 +14,7 @@ class memcached(
   $install_dev     = false,
   $pid_path        = '/var/run/memcached.pid',
 ) inherits memcached::params {
-  Memcached_config<| |> -> File[$memcached::params::config_file]
+  #Memcached_config<| |> -> File[$memcached::params::config_file]
 
   package { $memcached::params::package_name:
     ensure => $package_ensure,
@@ -43,7 +43,7 @@ class memcached(
   }
 
   if $logfile{
-    memcached_config{ "logfile": value => $logfile}
+    memcached_config{ "logfile": value => $logfile;}
   }
   if $max_memory{
     memcached_config{ "max_memory": value => $max_memory}
