@@ -14,6 +14,7 @@ class memcached(
   $install_dev     = false,
   $pid_path        = '/var/run/memcached.pid',
 ) inherits memcached::params {
+  Memcached_config<| |> -> File[$memcached::params::config_file]
 
   package { $memcached::params::package_name:
     ensure => $package_ensure,
@@ -30,7 +31,6 @@ class memcached(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($memcached::params::config_tmpl),
     require => Package[$memcached::params::package_name],
   }
 
@@ -40,5 +40,42 @@ class memcached(
     hasrestart => true,
     hasstatus  => false,
     subscribe  => File[$memcached::params::config_file],
+  }
+
+  if $logfile{
+    memcached_config{ "logfile": value => $logfile}
+  }
+  if $max_memory{
+    memcached_config{ "max_memory": value => $max_memory}
+  }
+  if $item_size{
+    memcached_config{ "item_size": value => $item_size}
+  }
+  if $lock_memory{
+    memcached_config{ "lock_memory": value => $lock_memory}
+  }
+  if $listen_ip{
+    memcached_config{ "listen_ip": value => $listen_ip}
+  }
+  if $tcp_port{
+    memcached_config{ "tcp_port": value => $tcp_port}
+  }
+  if $udp_port{
+    memcached_config{ "udp_port": value => $udp_port}
+  }
+  if $max_connections{
+    memcached_config{ "max_connections": value => $max_connections}
+  }
+  if $verbosity{
+    memcached_config{ "verbosity": value => $verbosity}
+  }
+  if $unix_socket{
+    memcached_config{ "unix_socket": value => $unix_socket}
+  }
+  if $install_dev{
+    memcached_config{ "install_dev": value => $install_dev}
+  }
+  if $pid_path{
+    memcached_config{ "pid_path": value => $pid_path}
   }
 }
